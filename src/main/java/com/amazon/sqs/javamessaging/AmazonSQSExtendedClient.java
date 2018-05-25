@@ -553,9 +553,12 @@ public class AmazonSQSExtendedClient extends AmazonSQSExtendedClientBase impleme
 		String receiptHandle = deleteMessageRequest.getReceiptHandle();
 		String origReceiptHandle = receiptHandle;
 		if (isS3ReceiptHandle(receiptHandle)) {
-			deleteMessagePayloadFromS3(receiptHandle);
 			origReceiptHandle = getOrigReceiptHandle(receiptHandle);
+			if (clientConfiguration.isAllowS3DeletionEnabled()) {
+				deleteMessagePayloadFromS3(receiptHandle);
+			}
 		}
+
 		deleteMessageRequest.setReceiptHandle(origReceiptHandle);
 		return super.deleteMessage(deleteMessageRequest);
 	}
@@ -915,9 +918,12 @@ public class AmazonSQSExtendedClient extends AmazonSQSExtendedClientBase impleme
 			String receiptHandle = entry.getReceiptHandle();
 			String origReceiptHandle = receiptHandle;
 			if (isS3ReceiptHandle(receiptHandle)) {
-				deleteMessagePayloadFromS3(receiptHandle);
+				if (clientConfiguration.isAllowS3DeletionEnabled()) {
+					deleteMessagePayloadFromS3(receiptHandle);
+				}
 				origReceiptHandle = getOrigReceiptHandle(receiptHandle);
 			}
+
 			entry.setReceiptHandle(origReceiptHandle);
 		}
 		return super.deleteMessageBatch(deleteMessageBatchRequest);

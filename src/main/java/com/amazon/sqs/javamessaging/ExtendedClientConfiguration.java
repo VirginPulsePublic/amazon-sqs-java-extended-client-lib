@@ -35,6 +35,7 @@ public class ExtendedClientConfiguration {
 	private String s3BucketName;
 	private boolean largePayloadSupport = false;
 	private boolean alwaysThroughS3 = false;
+	private boolean allowS3Deletion = true;
 	private int messageSizeThreshold = SQSExtendedClientConstants.DEFAULT_MESSAGE_SIZE_THRESHOLD;
 
 	public ExtendedClientConfiguration() {
@@ -48,6 +49,7 @@ public class ExtendedClientConfiguration {
 		this.largePayloadSupport = other.largePayloadSupport;
 		this.alwaysThroughS3 = other.alwaysThroughS3;
 		this.messageSizeThreshold = other.messageSizeThreshold;
+		this.allowS3Deletion = other.allowS3Deletion;
 	}
 
 	/**
@@ -119,6 +121,25 @@ public class ExtendedClientConfiguration {
 	 */
 	public boolean isLargePayloadSupportEnabled() {
 		return largePayloadSupport;
+	}
+
+
+	/**
+	 * set if the support for s3 object deletion is enabled.
+	 * @param allowS3Deletion
+	 *           Whether or not data objects should be deleted
+	 *           from Amazon S3. Default: true
+	 */
+	public void setAllowS3DeletionEnabled(Boolean allowS3Deletion) { this.allowS3Deletion = allowS3Deletion; }
+
+
+	/**
+	 * Check if the support for s3 object deletion is enabled.
+	 *
+	 * @return true if s3 object deletion is enabled.
+	 */
+	public boolean isAllowS3DeletionEnabled() {
+		return allowS3Deletion;
 	}
 
 	/**
