@@ -189,6 +189,19 @@ public class ExtendedClientConfiguration {
 	}
 
 	/**
+	 * Sets the s3 deletion in Amazon
+	 * S3.
+	 *
+	 * @param withS3Deletion
+	 *            all s3 message deletion
+	 * @return the updated ExtendedClientConfiguration object.
+	 */
+	public ExtendedClientConfiguration withS3DeletionEnabled(boolean withS3Deletion) {
+		setAllowS3DeletionEnabled(withS3Deletion);
+		return this;
+	}
+
+	/**
 	 * Gets the message size threshold for storing message payloads in Amazon
 	 * S3.
 	 *
