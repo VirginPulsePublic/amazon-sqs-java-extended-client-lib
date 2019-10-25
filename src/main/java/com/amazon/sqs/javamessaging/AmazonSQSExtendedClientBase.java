@@ -1972,6 +1972,7 @@ abstract class AmazonSQSExtendedClientBase implements AmazonSQS {
 	 * @throws IllegalArgumentException
 	 *             If any problems are detected with the specified endpoint.
 	 */
+	@Deprecated
 	public void setEndpoint(String endpoint) throws IllegalArgumentException {
 
 		amazonSqsToBeExtended.setEndpoint(endpoint);
@@ -2003,6 +2004,7 @@ abstract class AmazonSQSExtendedClientBase implements AmazonSQS {
 	 * @see Region#getRegion(com.amazonaws.regions.Regions)
 	 * @see Region#createClient(Class, AWSCredentialsProvider, ClientConfiguration)
 	 */
+	@Deprecated
 	public void setRegion(Region region) throws IllegalArgumentException {
 
 		amazonSqsToBeExtended.setRegion(region);
