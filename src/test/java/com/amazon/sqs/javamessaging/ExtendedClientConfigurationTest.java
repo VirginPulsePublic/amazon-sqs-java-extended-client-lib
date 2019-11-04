@@ -17,7 +17,7 @@ package com.amazon.sqs.javamessaging;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Matchers.isA;

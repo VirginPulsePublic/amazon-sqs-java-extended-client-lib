@@ -31,11 +31,12 @@ import com.amazonaws.services.sqs.model.SendMessageBatchRequest;
 import com.amazonaws.services.sqs.model.SendMessageBatchRequestEntry;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
 
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.isA;
 import static org.mockito.Mockito.mock;
@@ -152,10 +153,10 @@ public class AmazonSQSExtendedClientTest {
                 .withMessageAttributeNames(SQSExtendedClientConstants.RESERVED_ATTRIBUTE_NAME);
 
         sqsExtended.receiveMessage(messageRequest);
-        Assert.assertEquals(expectedRequest, messageRequest);
+        assertEquals(expectedRequest, messageRequest);
 
         sqsExtended.receiveMessage(messageRequest);
-        Assert.assertEquals(expectedRequest, messageRequest);
+        assertEquals(expectedRequest, messageRequest);
     }
 
     @Test
@@ -205,7 +206,7 @@ public class AmazonSQSExtendedClientTest {
         verify(mockSqsBackend).sendMessage(sendMessageRequestCaptor.capture());
 
         Map<String, MessageAttributeValue> attributes = sendMessageRequestCaptor.getValue().getMessageAttributes();
-        Assert.assertTrue(attributes.isEmpty());
+        assertTrue(attributes.isEmpty());
     }
 
     @Test
@@ -220,8 +221,8 @@ public class AmazonSQSExtendedClientTest {
         verify(mockSqsBackend).sendMessage(sendMessageRequestCaptor.capture());
 
         Map<String, MessageAttributeValue> attributes = sendMessageRequestCaptor.getValue().getMessageAttributes();
-        Assert.assertEquals("Number", attributes.get(SQSExtendedClientConstants.RESERVED_ATTRIBUTE_NAME).getDataType());
-        Assert.assertEquals(messageLength, (int)Integer.valueOf(attributes.get(SQSExtendedClientConstants.RESERVED_ATTRIBUTE_NAME).getStringValue()));
+        assertEquals("Number", attributes.get(SQSExtendedClientConstants.RESERVED_ATTRIBUTE_NAME).getDataType());
+        assertEquals(messageLength, (int)Integer.valueOf(attributes.get(SQSExtendedClientConstants.RESERVED_ATTRIBUTE_NAME).getStringValue()));
     }
 
     private String generateStringWithLength(int messageLength) {
